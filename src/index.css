@@ -1,0 +1,235 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* VELOCITA — Arctic White + Slate Design System
+   Porsche showroom: minimal monochrome, graphite carbon, arctic white accent.
+   All colors are HSL. All tokens are semantic. */
+
+@layer base {
+  :root {
+    /* Core surfaces — deep slate carbon */
+    --background: 220 12% 7%;
+    --foreground: 0 0% 98%;
+
+    --card: 220 10% 11%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 220 12% 9%;
+    --popover-foreground: 0 0% 98%;
+
+    /* Arctic White — brand */
+    --primary: 0 0% 98%;
+    --primary-foreground: 220 14% 8%;
+    --primary-glow: 200 30% 96%;
+
+    --secondary: 220 10% 16%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 220 10% 14%;
+    --muted-foreground: 220 8% 65%;
+
+    --accent: 0 0% 98%;
+    --accent-foreground: 220 14% 8%;
+
+    --destructive: 0 72% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 10% 18%;
+    --input: 220 10% 16%;
+    --ring: 0 0% 98%;
+
+    --radius: 0.25rem;
+
+    /* Carbon / slate system */
+    --carbon-900: 220 14% 5%;
+    --carbon-800: 220 12% 9%;
+    --carbon-700: 220 10% 13%;
+    --carbon-600: 220 10% 18%;
+    --carbon-500: 220 8% 26%;
+
+    /* Status colors */
+ --status-available: 142 65% 22%;
+    --status-booked: 38 90% 25%;
+    --status-sold: 220 10% 18%;
+    /* Gradients */
+    --gradient-crimson: linear-gradient(135deg, hsl(0 0% 98%), hsl(220 8% 75%));
+    --gradient-carbon: linear-gradient(135deg, hsl(220 12% 12%), hsl(220 14% 6%));
+    --gradient-radial: radial-gradient(ellipse at center, hsl(0 0% 98% / 0.10), transparent 70%);
+    --gradient-hero: linear-gradient(180deg, hsl(220 14% 5% / 0) 0%, hsl(220 14% 7%) 100%);
+
+    /* Shadows / glows */
+    --shadow-crimson: 0 10px 40px -10px hsl(0 0% 98% / 0.25);
+    --shadow-carbon: 0 20px 60px -20px hsl(220 14% 0% / 0.85);
+    --glow-crimson: 0 0 30px hsl(0 0% 100% / 0.35);
+    --glow-soft: 0 0 60px hsl(0 0% 98% / 0.12);
+
+    /* Transitions */
+    --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+    --transition-smooth: all 0.4s var(--ease-out-expo);
+
+    --sidebar-background: 220 12% 8%;
+    --sidebar-foreground: 0 0% 92%;
+    --sidebar-primary: 0 0% 98%;
+    --sidebar-primary-foreground: 220 14% 8%;
+    --sidebar-accent: 220 10% 14%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 220 10% 18%;
+    --sidebar-ring: 0 0% 98%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Rajdhani', system-ui, sans-serif;
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -10%, hsl(0 0% 98% / 0.06), transparent),
+      linear-gradient(180deg, hsl(220 14% 7%), hsl(220 14% 5%));
+    background-attachment: fixed;
+  }
+
+  h1, h2, h3, h4, h5 {
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 0.02em;
+  }
+
+.font-display { font-family: 'Plus Jakarta Sans', sans-serif; }
+  .font-body    { font-family: 'DM Sans', sans-serif; }
+  .font-mono    { font-family: 'DM Mono', monospace; }
+}
+
+@layer components {
+  /* Carbon fiber surface */
+  .carbon-surface {
+    background-color: hsl(var(--carbon-800));
+    background-image:
+      repeating-linear-gradient(45deg, hsl(0 0% 8%) 0 2px, hsl(0 0% 5%) 2px 4px),
+      repeating-linear-gradient(-45deg, hsl(0 0% 9%) 0 2px, transparent 2px 4px);
+    background-size: 6px 6px;
+  }
+
+  .carbon-surface-deep {
+    background-color: hsl(var(--carbon-900));
+    background-image:
+      repeating-linear-gradient(45deg, hsl(0 0% 6%) 0 2px, hsl(0 0% 3%) 2px 4px),
+      repeating-linear-gradient(-45deg, hsl(0 0% 7%) 0 2px, transparent 2px 4px);
+    background-size: 8px 8px;
+  }
+
+  /* Crimson scan line */
+  .scan-line {
+    position: relative;
+    overflow: hidden;
+  }
+  .scan-line::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, hsl(var(--primary) / 0.4), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.8s var(--ease-out-expo);
+  }
+  .scan-line:hover::after {
+    transform: translateX(100%);
+  }
+
+  /* Text accent — simple, no glow */
+  .text-glow {
+    text-shadow: none;
+  }
+
+  /* Decorative corner brackets */
+  .corner-brackets {
+    position: relative;
+  }
+  .corner-brackets::before,
+  .corner-brackets::after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border: 1px solid hsl(var(--primary));
+  }
+  .corner-brackets::before {
+    top: -1px; left: -1px;
+    border-right: none; border-bottom: none;
+  }
+  .corner-brackets::after {
+    bottom: -1px; right: -1px;
+    border-left: none; border-top: none;
+  }
+
+  /* Skewed crimson tag */
+  .crimson-tag {
+    @apply inline-flex items-center gap-2 px-3 py-1 text-xs font-mono uppercase tracking-widest;
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+    clip-path: polygon(8% 0, 100% 0, 92% 100%, 0 100%);
+  }
+
+  /* Garage door panels */
+  .garage-door-left {
+    animation: garage-open-left 1.6s var(--ease-out-expo) forwards;
+  }
+  .garage-door-right {
+    animation: garage-open-right 1.6s var(--ease-out-expo) forwards;
+  }
+}
+
+@layer utilities {
+  .bg-gradient-crimson { background: var(--gradient-crimson); }
+  .bg-gradient-carbon  { background: var(--gradient-carbon); }
+  .bg-gradient-radial  { background: var(--gradient-radial); }
+  .shadow-crimson      { box-shadow: var(--shadow-crimson); }
+  .shadow-carbon       { box-shadow: var(--shadow-carbon); }
+  .glow-crimson        { box-shadow: var(--glow-crimson); }
+  .transition-smooth   { transition: var(--transition-smooth); }
+
+  /* Hide scrollbar */
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { scrollbar-width: none; }
+}
+
+@keyframes garage-open-left {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+@keyframes garage-open-right {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(100%); }
+}
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px hsl(var(--primary) / 0.4); }
+  50%      { box-shadow: 0 0 40px hsl(var(--primary) / 0.8); }
+}
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%      { transform: translateY(-10px); }
+}
+@keyframes scan {
+  0%   { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+@keyframes ticker {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
